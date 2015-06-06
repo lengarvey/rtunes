@@ -91,7 +91,8 @@ CREATE TABLE songs (
     file character varying,
     processed boolean DEFAULT false,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    cover character varying
 );
 
 
@@ -160,4 +161,6 @@ SET search_path TO "$user",public;
 INSERT INTO schema_migrations (version) VALUES ('20150606080805');
 
 INSERT INTO schema_migrations (version) VALUES ('20150606093038');
+
+INSERT INTO schema_migrations (version) VALUES ('20150606112843');
 

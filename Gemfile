@@ -12,6 +12,7 @@ gem 'que'
 gem 'carrierwave'
 gem 'simple_form'
 gem 'taglib-ruby', require: 'taglib'
+gem 'bourbon'
 
 group :development, :test do
   gem 'byebug'

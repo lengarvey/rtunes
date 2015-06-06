@@ -6,7 +6,9 @@ class SongMetadataService < AbstractMetadataService
   private
 
   def store(metadata)
-    song.update!(metadata.slice(:title, :artist).merge(processed: true))
+    song.cover = File.open(metadata[:cover_art])
+    song.assign_attributes(metadata.slice(:title, :artist).merge(processed: true))
+    song.save!
   end
 
   def metadata_service

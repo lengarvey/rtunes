@@ -1,0 +1,11 @@
+.song {
+  @include clearfix;
+  border: 1px solid black;
+}
+
+.song__cover {
+  float: left;
+
+  width: 100px;
+  height: 100px;
+}

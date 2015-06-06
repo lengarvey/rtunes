@@ -13,6 +13,7 @@ Designed for #railscamp 17
 
 1. A Mac - it shells out to `afplay` in the background because I'm terrible.
 2. Ruby and Rails.
+3. taglib `brew install taglib`
 3. Speakers to listen to your rad music.
 
 ## Data model

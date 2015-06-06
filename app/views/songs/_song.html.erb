@@ -2,4 +2,5 @@
   <%= image_tag song.cover, class: 'song__cover' %>
   <h3><%= song.title %></h3>
   <p><%= song.artist %></p>
+  <%= link_to 'Queue', song_queue_path(song), method: :post %>
 </div>

@@ -9,3 +9,9 @@
   width: 100px;
   height: 100px;
 }
+
+.song__queued {
+  .song__queue-link {
+    display: none;
+  }
+}

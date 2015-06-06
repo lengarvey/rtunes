@@ -9,7 +9,7 @@ class PlayRandomSong < Que::Job
   end
 
   def destroy
-    PlayRandomSong.enqueue
     super
+    PlayRandomSong.enqueue
   end
 end

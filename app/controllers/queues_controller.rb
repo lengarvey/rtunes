@@ -7,14 +7,12 @@ class QueuesController < ApplicationController
   def create
     @song = Song.processed.find(params[:song_id])
 
-    notice = if song_in_queue?
-      "#{@song.title} already in queue"
+    if song_in_queue?
+      redirect_to :back, alert: "#{@song.title} already in queue"
     else
       Music.enqueue @song.id
-      "#{@song.title} queued"
+      redirect_to root_path, notice: "#{@song.title} queued"
     end
-
-    redirect_to root_path, notice: notice
   end
 
   private

@@ -8,6 +8,15 @@ class Song < ActiveRecord::Base
   validates :title, presence: true, if: :processed
   validates :artist, presence: true, if: :processed
 
+  validates_uniqueness_of :md5hash, on: :create
+
+  # I kinda don't like callbacks
+  before_validation :compute_hash
+
+  def compute_hash
+    self.md5hash = Digest::MD5.hexdigest(file.read) if md5hash.blank?
+  end
+
   def mp3?
     !!file.path.match(/mp3\Z/)
   end

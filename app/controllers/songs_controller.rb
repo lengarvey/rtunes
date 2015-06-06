@@ -15,6 +15,7 @@ class SongsController < ApplicationController
 
       redirect_to songs_path, notice: 'Song added for processing'
     else
+      flash.now.alert = "Song not added"
       render :new
     end
   end

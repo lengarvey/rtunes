@@ -3,7 +3,7 @@ class PlayRandomSong < Que::Job
   @queue = 'music_playing'
 
   def run
-    song = Song.all.sample
+    song = Song.processed.sample
 
     SongPlayerService.play(song)
   end

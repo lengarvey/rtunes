@@ -7,13 +7,17 @@ class Mp3MetadataService < AbstractMetadataService
       metadata[:title] = tag.title
       metadata[:artist] = tag.artist
 
-      metadata[:cover_art] = cover_art(file.id3v2_tag.frame_list('APIC').first)
+      metadata[:cover_art] = cover_art(song_frame(file)) if song_frame(file).present?
     end
 
     metadata
   end
 
   private
+
+  def song_frame(file)
+    file.id3v2_tag.frame_list('APIC').first
+  end
 
   def cover_art(frame)
     cover_format = if frame.mime_type == "image/jpeg"

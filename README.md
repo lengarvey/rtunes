@@ -32,7 +32,7 @@ Designed for #railscamp 17
 ## TODO
 
 1. Make the UI heaps nicer.
-2. Allow multiple songs to be uploaded at once.
+2. ~~Allow multiple songs to be uploaded at once.~~
 3. ~~Allow the songs to be stopped using the UI.~~
 4. Song searching.
 5. If there's a binary like `afplay` on linux or something that could be a thing.

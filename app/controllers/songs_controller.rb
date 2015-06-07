@@ -8,21 +8,22 @@ class SongsController < ApplicationController
   end
 
   def create
-    @song = Song.create(song_params)
+    # this is a pretty awful hack to create lots of songs with one request
+    add_songs
 
-    if @song.persisted?
-      ProcessSong.enqueue @song.id
-
-      redirect_to songs_path, notice: 'Song added for processing'
-    else
-      flash.now.alert = "Song not added"
-      render :new
-    end
+    redirect_to songs_path, notice: 'Songs added for processing'
   end
 
   private
 
   def song_params
-    params.require(:song).permit(:file)
+    params.require(:song).permit(file: [])
+  end
+
+  def add_songs
+    song_params[:file].each do |song_file|
+      song = Song.create(file: song_file)
+      ProcessSong.enqueue song.id if song.persisted?
+    end
   end
 end

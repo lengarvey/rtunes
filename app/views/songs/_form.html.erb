@@ -1,4 +1,4 @@
 <%= simple_form_for @song do |f| %>
-  <%= f.input :file %>
+  <%= f.input :file, input_html: { multiple: true } %>
   <%= f.submit %>
 <% end %>

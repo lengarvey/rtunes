@@ -6,10 +6,6 @@ class PlayRandomSong < Que::Job
     song = Song.processed.sample
 
     SongPlayerService.play(song)
-  end
-
-  def destroy
-    super
     PlayRandomSong.enqueue
   end
 end

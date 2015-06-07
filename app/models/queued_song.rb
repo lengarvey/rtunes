@@ -1,9 +1,12 @@
-# this is kind of horrible
 class QueuedSong < ActiveRecord::Base
-  self.table_name = "que_jobs"
-  default_scope { where("job_class = 'Music'") }
+  belongs_to :song
+  validates :song_id, uniqueness: true
 
-  def song
-    Song.find(args.first)
+  def self.up_next
+    unplayed.order(:created_at).limit(1).first || RandomSong.new
+  end
+
+  def mark_as_played
+    destroy
   end
 end

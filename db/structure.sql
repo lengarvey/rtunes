@@ -105,6 +105,37 @@ ALTER SEQUENCE que_jobs_job_id_seq OWNED BY que_jobs.job_id;
 
 
 --
+-- Name: queued_songs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE queued_songs (
+    id integer NOT NULL,
+    song_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: queued_songs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE queued_songs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: queued_songs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE queued_songs_id_seq OWNED BY queued_songs.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -167,6 +198,13 @@ ALTER TABLE ONLY que_jobs ALTER COLUMN job_id SET DEFAULT nextval('que_jobs_job_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY queued_songs ALTER COLUMN id SET DEFAULT nextval('queued_songs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY songs ALTER COLUMN id SET DEFAULT nextval('songs_id_seq'::regclass);
 
 
@@ -187,6 +225,14 @@ ALTER TABLE ONLY que_jobs
 
 
 --
+-- Name: queued_songs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY queued_songs
+    ADD CONSTRAINT queued_songs_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: songs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -199,6 +245,13 @@ ALTER TABLE ONLY songs
 --
 
 CREATE INDEX index_players_on_song_id ON players USING btree (song_id);
+
+
+--
+-- Name: index_queued_songs_on_song_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_queued_songs_on_song_id ON queued_songs USING btree (song_id);
 
 
 --
@@ -217,6 +270,14 @@ ALTER TABLE ONLY players
 
 
 --
+-- Name: fk_rails_ce512c246a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY queued_songs
+    ADD CONSTRAINT fk_rails_ce512c246a FOREIGN KEY (song_id) REFERENCES songs(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -231,4 +292,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150606112843');
 INSERT INTO schema_migrations (version) VALUES ('20150606133003');
 
 INSERT INTO schema_migrations (version) VALUES ('20150607065723');
+
+INSERT INTO schema_migrations (version) VALUES ('20150607081700');
 

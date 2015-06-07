@@ -1,4 +1,4 @@
-🎵🎵🎵🎵🎵 A simple app for playing shared music at events 🎵🎵🎵🎵🎵
+:musical_note::musical_note::musical_note::musical_note::musical_note: A simple app for playing shared music at events :musical_note::musical_note::musical_note::musical_note::musical_note:
 ===============================================
 
 Upload and queue music to play on a server. Suitable for private functions
@@ -22,7 +22,7 @@ Designed for #railscamp 17
 5. Speakers to listen to your rad music.
 6. foreman (`gem install foreman`)
 
-## Starting the 🎵🎵🎵🎵🎵
+## Starting the :musical_note::musical_note::musical_note::musical_note::musical_note:
 
 1. Clone this repo
 2. `bundle install`

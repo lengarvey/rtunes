@@ -36,6 +36,7 @@ Designed for #railscamp 17
 3. ~~Allow the songs to be stopped using the UI.~~
 4. When the server boots, do a check to see that there is a Music job queued.
 4. Song searching.
+4. TESTS!
 5. If there's a binary like `afplay` on linux or something that could be a thing.
 6. Explore discovering songs on a local network using bonjour or something clever.
 

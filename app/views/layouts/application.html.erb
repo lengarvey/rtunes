@@ -13,6 +13,15 @@
       <%= link_to 'The Queue', root_path %>
       <%= link_to 'Songs', songs_path %>
       <%= link_to 'Add a song', new_song_path %>
+
+      <% if @player.playing? %>
+        <span class="now-playing">
+          <%= @player.song.try(:title) %>
+        </span>
+        <%= link_to 'Stop', stop_path, method: :post %>
+      <% else %>
+        <%= link_to 'Play', play_path, method: :post %>
+      <% end %>
     </nav>
   </header>
 

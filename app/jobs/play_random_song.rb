@@ -3,9 +3,19 @@ class PlayRandomSong < Que::Job
   @queue = 'music_playing'
 
   def run
-    song = Song.processed.sample
+    player = Player.find(1)
+    puts "New random song!"
 
-    SongPlayerService.play(song)
-    PlayRandomSong.enqueue
+    if player.present? && player.playing?
+      song = Song.processed.sample
+
+      puts "Randomly playing #{song.title}"
+      SongPlayerService.play(song, player, random: true)
+      puts "Song finished"
+      PlayRandomSong.enqueue
+    else
+      puts "Player not playing. Not playing a random song"
+      PlayRandomSong.enqueue(run_at: 15.seconds.from_now)
+    end
   end
 end

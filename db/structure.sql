@@ -30,6 +30,39 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: players; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE players (
+    id integer NOT NULL,
+    playing boolean DEFAULT false NOT NULL,
+    song_id integer,
+    requested boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: players_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE players_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: players_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE players_id_seq OWNED BY players.id;
+
+
+--
 -- Name: que_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -117,6 +150,13 @@ ALTER SEQUENCE songs_id_seq OWNED BY songs.id;
 
 
 --
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY players ALTER COLUMN id SET DEFAULT nextval('players_id_seq'::regclass);
+
+
+--
 -- Name: job_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -128,6 +168,14 @@ ALTER TABLE ONLY que_jobs ALTER COLUMN job_id SET DEFAULT nextval('que_jobs_job_
 --
 
 ALTER TABLE ONLY songs ALTER COLUMN id SET DEFAULT nextval('songs_id_seq'::regclass);
+
+
+--
+-- Name: players_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY players
+    ADD CONSTRAINT players_pkey PRIMARY KEY (id);
 
 
 --
@@ -147,10 +195,25 @@ ALTER TABLE ONLY songs
 
 
 --
+-- Name: index_players_on_song_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_players_on_song_id ON players USING btree (song_id);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: fk_rails_0e60383403; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY players
+    ADD CONSTRAINT fk_rails_0e60383403 FOREIGN KEY (song_id) REFERENCES songs(id);
 
 
 --
@@ -166,4 +229,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150606093038');
 INSERT INTO schema_migrations (version) VALUES ('20150606112843');
 
 INSERT INTO schema_migrations (version) VALUES ('20150606133003');
+
+INSERT INTO schema_migrations (version) VALUES ('20150607065723');
 
